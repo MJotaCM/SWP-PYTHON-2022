@@ -1,13 +1,14 @@
-#Aufgabe Programmiere Lottoziehung als Methode:
-
-# Alternetive Lösung
-"""
 import random
 import numpy as np
 
-all = np.arange(1, 45)
+#Aufgabe Programmiere Lottoziehung als Methode:
+#Aufgabe 1 
+all = np.arange(1, 46)
 random.shuffle(all)
-wn = all[0:6]
+print(all[0:6])
 
-print(wn)
-"""
+#Aufgabe 2
+md = dict.fromkeys(np.arange(1, 46), 0)
+for i in range(0, 1000):
+    md[int(random.random()*45 + 1)] += 1
+print(md)
