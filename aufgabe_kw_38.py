@@ -18,5 +18,14 @@ def statistik(start, end, anz):
         d[int(random.random()*end + 1)] += 1
     return d
 
+def statistik_2(start, end, anz):
+    mdic = {}
+    for i in range(end):
+        mdic[i] = 0
+    for i in range(anz):
+        mdic[int(random.random()*end + 1)] += 1
+    return mdic
+
+
 print(zahlen_ziehen(1,45,6))
 print(statistik(1,45,1000))
