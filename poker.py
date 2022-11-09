@@ -89,7 +89,13 @@ def statistics(anz):
     print(p)
 
 
-statistics(100000)
+def main():
+    anz = int(input('Wie oft soll gezogen werden?'))
+    statistics(anz)
+    
+
+if __name__ == "__main__":
+    main()
 
 
 
