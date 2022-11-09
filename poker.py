@@ -33,9 +33,9 @@ def multiples():
     return Counter(val).values()
 
 
-def multiple_pairs():
-    results  = list(multiples())
-    return 2 in (Counter(results).values()) 
+#def multiple_pairs():
+#    results  = multiples()
+#    return 2 in (Counter(results).values()) 
 
 
 def flush():
@@ -73,7 +73,7 @@ def update_dic():
         res['Straight'] +=1
     elif 3 in multiples():
         res['Three Of A Kind'] +=1
-    elif multiple_pairs():
+    elif 2 in (Counter(multiples()).values()) :
         res['Two Pair'] +=1
     elif 2 in multiples():
         res['One Pair'] +=1
@@ -82,7 +82,6 @@ def update_dic():
 def statistics(anz):
     for i in range(anz):
         update_dic()
-    print(res)
     p = {}
     for i in rank:
         p[i] = (res[i] / anz) *100
@@ -90,8 +89,11 @@ def statistics(anz):
 
 
 def main():
-    anz = int(input('Wie oft soll gezogen werden?'))
-    statistics(anz)
+    try:
+        anz = int(input('How many rounds do you want?'))
+        statistics(anz)
+    except:
+        print('The input was not an int!')
     
 
 if __name__ == "__main__":
