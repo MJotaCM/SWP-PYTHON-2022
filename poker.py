@@ -84,7 +84,7 @@ def statistics(anz):
         update_dic()
     p = {}
     for i in rank:
-        p[i] = (res[i] / anz) *100
+        p[i] =  round((res[i] / anz) *100, 6)
     print(p)
 
 
