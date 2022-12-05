@@ -30,13 +30,16 @@ def game(p):
 
 def console_game():
     try:
-        p = int(input('Coose!: 0 = Rock    1 = Paper    2 = Scissors    3 = Spock    4 = Lizard'))
-        game(p)
-    except:
-        print('The input was not an valid!')
+        try:
+            p = int(input('Coose!: 0 = Rock    1 = Paper    2 = Scissors    3 = Spock    4 = Lizard'))
+            game(p)
+        except:
+            print('The input was not an valid!')
 
-    if (input('Play Again?') == 'j'):
+        if (input('Play Again?') == 'j'):
             console_game()
+    except:
+        print('End of the game')
 
 def main():
     console_game()
