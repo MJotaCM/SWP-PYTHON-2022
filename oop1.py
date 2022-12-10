@@ -40,6 +40,7 @@ class Firma:
         self.mitarbeiter.append(Mitarbeiter('Toni','Mayr', Geschlecht.m, Abteilung.IT))
         self.mitarbeiter.append(Mitarbeiter('Emma','Huber', Geschlecht.w, Abteilung.Vertrieb))
         self.mitarbeiter.append(GruppenLeiter('Herbert','Maier', Geschlecht.m, Abteilung.Management, 13))
+        self.mitarbeiter.append(GruppenLeiter('Herbert','Maier', Geschlecht.m, Abteilung.Management, 13))
 
     def anzahl_mitarbeiter(self):
         return len(self.mitarbeiter)
@@ -57,14 +58,23 @@ class Firma:
         return len(abt)
 
     # noch zu machen
-    def groesste_abteilung(self, abteilungen):
-        pass
+    def groesste_abteilung(self):
+        abt = {}
+        for i in self.mitarbeiter:
+            if i.abteilung.name in abt.keys():
+                abt[i.abteilung.name] += 1
+            else:
+                abt[i.abteilung.name] = 1
+        department = list(abt.keys())[0]
+        for d in abt.keys():
+            if abt[department] < abt[d]:
+                department = d
+        return department
+
 
     def w_m_verhaeltnis(self):
         d = {'m': 0, 'w':0, 'd': 0}
         for i in self.mitarbeiter:
-            #Wirft aus irgend nem Grund eine Fehlermeldung:
-            #d['m']+=1 if i.geschlecht == 'm' else d['m']+=1 if i.geschlecht == 'w' else d['d']+=1
             d[i.geschlecht.name] += 1
          
         for k in d.keys():
@@ -79,6 +89,7 @@ def main():
     print(f1.anzahl_leiter())
     print(f1.anzahl_mitarbeiter())
     print(f1.w_m_verhaeltnis())
+    print(f1.groesste_abteilung())
 
 
 if __name__ == "__main__":
