@@ -33,8 +33,9 @@ class GruppenLeiter(Mitarbeiter):
        
 
 class Firma:
-    def __init__(self, mitarbeiter = None):
+    def __init__(self, mitarbeiter = None, name = 'Audi'):
         self.mitarbeiter = [] if mitarbeiter is None else mitarbeiter
+        self.name = name
         
     def einige_mitarbeiter_erstellen(self):
         self.mitarbeiter.append(Mitarbeiter('Toni','Mayr', Geschlecht.m, Abteilung.IT))
