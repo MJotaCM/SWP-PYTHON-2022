@@ -1,25 +1,21 @@
 import random
 
-#https://realpython.com/linked-lists-python/
-
-class snode:
+class dnode:
 	def __init__(self, data = None):
 		self.data = data
 		self.next = None
+		self.prev = None
 
+class dlinked_list:
+	def __init__(self, first = None):
+		self.head = first
+		self.tail = first
 
-class slinked_list:
-	def __init__(self, head = None):
-		self.head = head
-	
 	def append(self, data):
-		new = snode(data)
-		cur = self.head
-		if cur != None:
-			while cur.next != None:
-				cur = cur.next
-			cur.next = new
-		else: self.head = new
+		new = dnode(data)
+		self.tail.next = new
+		new.prev = self.tail 
+		self.tail = new
 
 	def append_multiple(self, *data):
 		for d in data:
@@ -29,21 +25,13 @@ class slinked_list:
 		for i in range(anz):
 			self.append(int(random.random()*limit))
 
+	# fehlt noch
 	def insert(self, pos, data):
-		if pos > self.length(): return False 
-	
-		new = snode(data)
-		if pos == 0:
-			new.next = self.head
-			self.head = new
-		else:
-			cur = self.head
-			for i in range(0,pos-1):
-				cur = cur.next
-			nex = cur.next
-			cur.next = new
-			new.next = nex
-		return True
+		cur = self.tail if pos > self.length()//2 else self.head
+		steps = pos if True else self.length()-pos
+		for i in range(steps):
+			if cur == self.tail: cur = cur.prev
+			else: cur = cur.next
 	
 	def insert_multiple(self, pos, *data):
 		i = 0
@@ -67,6 +55,8 @@ class slinked_list:
 			cur = cur.next
 		print(e)
 
+	# in der else muss das noch adaptiert werden - wenn es am ende gelöscht wird
+	# wenn pos größer als die Hälfte - von hinten, sonst von vorne anfangen
 	def delete(self, pos):
 		if pos > self.length(): return False
 		if pos == 0: 
@@ -81,6 +71,7 @@ class slinked_list:
 	def pop(self):
 		self.delete(self.length()-1) 
 
+	# muss auch noch adaptiert werden
 	def reverse(self):
 		if self.length() != 0 and self.length() != 1: 
 			prev = None
@@ -94,7 +85,9 @@ class slinked_list:
 
 	def clear(self):
 		self.head = None
+		self.tail = None
 
+	# je nach pos von hinten oder vorne anfangen
 	def get_element(self, pos):
 		if pos == 0: return self.head.data
 		cur = self.head
@@ -118,23 +111,4 @@ class slinked_list:
 	def sort(self):
 		pass
 
-def main():
-	#n = snode(2)
-	slist = slinked_list()
-	#slist.append(1)
-	#slist.append(4)
-	#slist.append(3)
-	#print(slist.length())
-	#print(slist.get_element(1))
-	#slist.clear()
-	slist.append_multiple_randoms(10,10)
-	slist.display_data()
-	#slist.reverse()
-	#slist.append_multiple(1,2,3,4,5)
-	#print(slist.search(2))
-	#slist.insert(0,1)
-	slist.insert_multiple(0,1,2,3)
-	slist.display_data()
-
-if __name__ == "__main__":
-    main()
+	
