@@ -1,5 +1,6 @@
 import random
 import json
+import matplotlib.pyplot as plt
 
 #stats = {'Won': 0, 'Lost' : 0, 'Draw': 0}
 #figures = {0:0, 1:0, 2:0, 3:0, 4:0}
@@ -19,7 +20,7 @@ def strategic_computer_move():
     try:
         data = get_data()
         m = max(data, key = data.get)
-        return ((int(m) + 2) % 5)
+        return ((int(m) + 2) % 5) 
     except:
         random_computer_move()
 
@@ -27,7 +28,7 @@ def strategic_computer_move():
 def game(p):
     beats = {0:[1,3], 1:[2,4], 2:[0,3], 3:[1,4], 4:[0,2]}
     set_data(p)
-    c = strategic_computer_move()
+    c = random_computer_move()
     if(c == p):
         set_statistic('Draw') 
         print('You did not beat the computer. The computer did not beat you.')
@@ -42,14 +43,16 @@ def game(p):
 
 
 def get_data():
-    with open('figures.json') as json_file:
+    data = []
+    with open(r'Games\SSPES\figures.json') as json_file:
         data = json.load(json_file)
     return data
 
 def set_data(p):
     data = get_data()
+    #print(data)
     data[str(p)] += 1
-    with open('figures.json', 'w') as f:
+    with open(r'Games\SSPES\figures.json', 'w') as f:
         json.dump(data, f)
 
 def upload_data():
@@ -57,26 +60,29 @@ def upload_data():
     for key in data.keys():
         data[key] = data[key] + int(input('How many pulls in ' + key+ '? \n'))
 
-    with open('figures.json', 'w') as f:
+    with open(r'Games\SSPES\figures.json', 'w') as f:
         json.dump(data, f)
-
     console_game()
 
 
 
 def get_statistic():
-    with open('stats.json') as json_file:
+    data = {}
+    with open(r'Games\SSPES\stats.json') as json_file:
         data = json.load(json_file)
     return data
 
 def set_statistic(k):
     data = get_statistic()
     data[k] += 1
-    with open('stats.json', 'w') as f:
+    with open(r'Games\SSPES\stats.json', 'w') as f:
         json.dump(data, f)
 
 def show_statistic():
-    print(get_statistic())
+    stats = get_statistic()
+    print(stats)
+    plt.pie(stats.values(), labels=stats.keys())
+    plt.show()
     console_game()
 
 
