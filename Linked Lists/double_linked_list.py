@@ -13,9 +13,13 @@ class dlinked_list:
 
 	def append(self, data):
 		new = dnode(data)
-		self.tail.next = new
-		new.prev = self.tail 
-		self.tail = new
+		if self.head is None:
+			self.head = new
+			self.tail = new
+		else:
+			self.tail.next = new
+			new.prev = self.tail 
+			self.tail = new
 
 	def append_multiple(self, *data):
 		for d in data:
@@ -25,13 +29,20 @@ class dlinked_list:
 		for i in range(anz):
 			self.append(int(random.random()*limit))
 
-	# fehlt noch
 	def insert(self, pos, data):
-		cur = self.tail if pos > self.length()//2 else self.head
-		steps = pos if True else self.length()-pos
+		new = dnode(data)
+		len = self.length()
+		cur = self.tail if pos > (len//2) else self.head
+		steps = pos-1 if True else len-pos
+		p = 0 if cur == self.tail else 1
 		for i in range(steps):
-			if cur == self.tail: cur = cur.prev
+			if p==0 : cur = cur.prev
 			else: cur = cur.next
+		nex = cur.next
+		cur.next = new
+		new.prev = cur
+		new.next = nex
+		nex.prew = new
 	
 	def insert_multiple(self, pos, *data):
 		i = 0
@@ -71,17 +82,13 @@ class dlinked_list:
 	def pop(self):
 		self.delete(self.length()-1) 
 
-	# muss auch noch adaptiert werden
 	def reverse(self):
 		if self.length() != 0 and self.length() != 1: 
-			prev = None
 			cur = self.head
+			self.head, self.tail = self.tail, self.head
 			while cur != None:
-				next = cur.next
-				cur.next = prev
-				prev = cur
-				cur = next
-			self.head = prev
+				cur.prev, cur.next = cur.next, cur.prev
+				cur = cur.prev 
 
 	def clear(self):
 		self.head = None
@@ -110,5 +117,23 @@ class dlinked_list:
 
 	def sort(self):
 		pass
+
+def main():
+	dlist = dlinked_list()
+	
+	dlist.append_multiple_randoms(10,10)
+	dlist.append_multiple(1,2)
+	dlist.display_data()
+	print(dlist.length())
+	print(dlist.search(1))
+	dlist.insert_multiple(0,1,2,3)
+	#dlist.display_data()
+	dlist.reverse()
+	dlist.insert(8,2)
+	dlist.display_data()
+	#print(dlist.tail.data)
+
+if __name__ == "__main__":
+    main()
 
 	
