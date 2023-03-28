@@ -1,0 +1,8 @@
+Lösen Sie mittels Proxy-Pattern in Java:
+
+Modellieren Sie zwei Drucker (SW, Color), das Drucken soll für den Anwender 
+immer gleich funktionieren, sollte aber während der Laufzeit austauschbar 
+(swithTo methode bauen) sein. 
+
+Real Subject: ColorDrucker
+Proxy: SWDrucker
