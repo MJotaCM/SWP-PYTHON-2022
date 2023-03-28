@@ -12,6 +12,7 @@ class slinked_list:
 	def __init__(self, head = None):
 		self.head = head
 	
+
 	def append(self, data):
 		new = snode(data)
 		cur = self.head
@@ -21,20 +22,21 @@ class slinked_list:
 			cur.next = new
 		else: self.head = new
 
+
 	def append_multiple(self, *data):
 		for d in data:
 			self.append(d)
 	
+
 	def append_multiple_randoms(self, anz, limit):
 		for i in range(anz):
 			self.append(int(random.random()*limit))
 
+
 	def insert(self, pos, data):
-		if pos > self.length(): return False 
-	
 		new = snode(data)
 		if pos == 0:
-			new.next = self.head
+			new.next = (self.head).next
 			self.head = new
 		else:
 			cur = self.head
@@ -43,13 +45,15 @@ class slinked_list:
 			nex = cur.next
 			cur.next = new
 			new.next = nex
-		return True
-	
+			new.prev = cur
+
+		
 	def insert_multiple(self, pos, *data):
 		i = 0
 		for d in data:
 			i = i+1
 			self.insert((pos+(i-1)),d)
+
 
 	def length(self):
 		cur = self.head
@@ -59,6 +63,7 @@ class slinked_list:
 			cur = cur.next
 		return l
 
+
 	def display_data(self):
 		e = []
 		cur = self.head
@@ -66,6 +71,7 @@ class slinked_list:
 			e.append(cur.data)
 			cur = cur.next
 		print(e)
+
 
 	def delete(self, pos):
 		if pos > self.length(): return False
@@ -78,8 +84,10 @@ class slinked_list:
 			cur.next = (cur.next).next
 		return True
 
+
 	def pop(self):
 		self.delete(self.length()-1) 
+
 
 	def reverse(self):
 		if self.length() != 0 and self.length() != 1: 
@@ -92,8 +100,10 @@ class slinked_list:
 				cur = next
 			self.head = prev
 
+
 	def clear(self):
 		self.head = None
+
 
 	def get_element(self, pos):
 		if pos == 0: return self.head.data
@@ -102,11 +112,14 @@ class slinked_list:
 			cur = cur.next
 		return cur.data
 
+
 	def get_first(self):
 		return self.get_element(0)
 
+
 	def get_last(self):
 		return self.get_element(self.length()-1)
+
 
 	def search(self,ele):
 		cur = self.head
@@ -115,8 +128,6 @@ class slinked_list:
 			cur = cur.next 
 		return None
 
-	def sort(self):
-		pass
 
 def main():
 	#n = snode(2)
