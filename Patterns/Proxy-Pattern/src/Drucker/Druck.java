@@ -6,6 +6,7 @@ public class Druck {
 		Drucker d = new BWDrucker("Katzen");
 		d.druck();
 		d.newFile("Pandas");
-		d.switchToColor();
+		d.setColor(true);
+		d.druck();
 	}
 }

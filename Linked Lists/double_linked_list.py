@@ -137,7 +137,7 @@ class dlinked_list:
 			cur = cur.next 
 		return None
 
-	77
+	
 def main():
 	dlist = dlinked_list()
 	
@@ -145,7 +145,7 @@ def main():
 	#dlist.append_multiple(1,2)
 	dlist.display_data()
 	dlist.insert(0,0)
-	#dlist.delete(3)
+	dlist.delete(3)
 	#print(dlist.length())
 	#print(dlist.search(1))
 	#dlist.insert_multiple(9,1,2,3)

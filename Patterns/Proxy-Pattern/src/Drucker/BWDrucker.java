@@ -4,6 +4,7 @@ public class BWDrucker extends Drucker{
 
 	private String fn;
 	private ColorDrucker cd;
+	private boolean c = false;
 	
 	public BWDrucker(String fn) 
 	{
@@ -16,10 +17,21 @@ public class BWDrucker extends Drucker{
 		this.fn = fn;
 	}
 	
+	public void setColor(boolean c) 
+	{
+		this.c = c;
+	}
+	
 	@Override
 	public void druck() 
 	{
-		System.out.println("Folgendes Dockument wird gerade in sw gedruckt:" + this.fn );
+		if(c)
+		{
+			switchToColor();
+		}else 
+		{
+			System.out.println("Folgendes Dockument wird gerade in sw gedruckt:" + this.fn );
+		}
 	}
 	
 	public void switchToColor()
